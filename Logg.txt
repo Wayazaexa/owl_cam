@@ -1,0 +1,35 @@
+14/08/2023 Måndag
+
+bestämde oss för vilket projekt vi skull ta oss an.
+
+Provade oss fram om vi skulle jobba via terminalen(SSH) eller direkt på rasberryn eller via github.
+
+Vi bestämde oss för att jobba med git.
+
+vi formatterade sd-kort och förberedde en fungerande arbetsmiljö.
+
+15/08/2023 Tisdag
+
+Vi skapade ett github-repo
+
+Vi började testa koder för att ta bilder, spela in vid trigger av motion detector.
+
+16/08/2023 Onsdag
+
+Skapade en mindre funktion för att döpa filerna som skapats till dagens datum/tid.
+
+Började testa lite program för att streama lokalt.
+
+17/08/2023 Torsdag
+
+Installerade en fläkt på rpin
+
+installerade att program på rpin "P-sensor" för att hålla koll på hur hårt cpun arbetade samt temperatur
+
+började med att försöka kombinera våra olika funktioner.
+
+18/08/2023
+
+Lyckats kombinera en live-feed samtidigt som vi spelar in.
+
+Börjat kolla på HTML-lösning för att kalla på funktioner via interaktion.
