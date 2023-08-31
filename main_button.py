@@ -1,3 +1,4 @@
+#button test
 import time
 import datetime
 from gpiozero import Button
@@ -14,22 +15,25 @@ button2 = Button(22)
 button3 = Button(23)
 
 picam = Picamera2()
-picam.configure(picam.create_video_configuration(main={"size": (640, 480)}))
-
+video_config = picam.create_video_configuration(main={"size": (640, 480)})
+photo_config = picam.create_preview_configuration(main={"size": (640, 480)})
+my_config = video_config
 def get_file_name():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
 
 picam.start()
+
 while True:
     if button.is_pressed:
-        
+        picam.switch_mode(photo_config)
+            
         print("button 1 is pressed")
         
         file_name_photo = get_file_name()
         picam.capture_file('Photos/'+file_name_photo+'.jpg')
     elif button2.is_pressed:
         print("button 2 is pressed")
-        picam.start_recording(JpegEncoder(), FileOutput(output_stream))
+        #picam.start_recording(JpegEncoder(), FileOutput(output_stream))
         try:
             address = ('', 8000)
             server = StreamingServer(address, StreamingHandler)
@@ -38,10 +42,10 @@ while True:
         finally:
             picam.stop_recording()
     elif button3.is_pressed:
+        picam.switch_mode(photo_config)
+            
         print("button 3 is pressed")
-        
         encoder_vid = H264Encoder(10000000)
-        
         file_name = get_file_name()
         
         picam.start_recording(encoder_vid, FfmpegOutput('videos/'+file_name+'.mp4'))
