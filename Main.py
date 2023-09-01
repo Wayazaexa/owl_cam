@@ -1,41 +1,89 @@
 import time
 import datetime
+import threading
+from os import mkdir
 
-from gpiozero import MotionSensor
-from picamera2 import Picamera2
-from picamera2.encoders import H264Encoder
+from gpiozero import Button
+from signal import pause
+from picamera2 import Picamera2, Preview
 from picamera2.outputs import FfmpegOutput
+from picamera2.encoders import H264Encoder
+from stream_test_lib import * 
+
+#buttons
+button_take_pic = Button(27)
+button_start_stream = Button(22)
+button_capture_vid = Button(23)
+#button_stop_stream = Button(24)
+
+picam = Picamera2()
+#vid_config = picam.create_video_configuration(main={"size": (1280, 720)}, lores={"size": (640, 480)})
+vid_config = picam.create_video_configuration(main={"size": (640, 480)})
+pic_config = picam.create_still_configuration({"size": (1920, 1080)})
+picam.configure(vid_config)
+
+try:
+    mkdir('./videos')
+    mkdir('./photos')
+except OSError as error:
+    pass
 
 def get_file_name():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
 
-# Setup
-pir = MotionSensor(4)
-picam2 = Picamera2()
-video_config = picam2.create_video_configuration()
-picam2.configure(video_config)
+def button_1_take_pic():
+    print("button 1 is pressed")
+    picam.switch_mode(pic_config)
+    file_name_photo = get_file_name()
+    picam.capture_file('photos/'+file_name_photo+'.jpg')
 
-encoder = H264Encoder(10000000)
-counter = 0
+def button_2_streaming():
+    print("button 2 is pressed")
+    picam.switch_mode(vid_config)
+    picam.start_recording(JpegEncoder(), FileOutput(output_stream))
+    try:
+        address = ('', 8000)
+        server = StreamingServer(address, StreamingHandler)
+        server.serve_forever()
 
-# Infinite loop
-while True:
-    pir.wait_for_motion()
-    print("Motion Detected")
+    finally:
+        return
+
+def button_3_recording():
+    print("button 3 is pressed")
+    picam.switch_mode(vid_config)
+        
+    encoder_vid = H264Encoder(10000000)
+        
     file_name = get_file_name()
-    # Change the output with new motion detected event
-    output = FfmpegOutput('videos/'+file_name+'.mp4')
+        
+    picam.start_recording(encoder_vid, FfmpegOutput('videos/'+file_name+'.mp4'))
+    time.sleep(7)
+    picam.stop_recording()
+    
+streaming = False
+picam.start()
 
-    # Record a video for a set amount of time
-    picam2.start_recording(encoder, output)
-    time.sleep(5)
-    picam2.stop_recording()
+while True:
+    if button_take_pic.is_pressed:
+        button_1_take_pic()
+        #photo_thread = threading.Thread(target=button_1_take_pic)
+        #photo_thread.start()
+        button_take_pic.wait_for_release()
+        
+    elif button_start_stream.is_pressed:
+        if not streaming:
+            stream_thread = threading.Thread(target=button_2_streaming)
+            stream_thread.start()
+        else:
+            picam.stop_recording()
+        streaming = not streaming
+        button_start_stream.wait_for_release()
+         
+    elif button_capture_vid.is_pressed:
+        video_thread = threading.Thread(target=button_3_recording)
+        video_thread.start()
+        button_capture_vid.wait_for_release()
+
     
-    print("Recording Stopped")
-    counter += 1
-    pir.wait_for_no_motion()
-    print("Motion Stopped")
-    
-    # For testing, break the loop after 2 loops
-    if counter == 2:
-        break
+picam.close()

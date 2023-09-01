@@ -1,0 +1,29 @@
+/* styles.css */
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.logo {
+  font-size: 24px; /* Adjust the font size as needed */
+  color: #333; /* Change the color as desired */
+  text-decoration: none; /* Remove underlines or other decorations */
+}
+
+form button {
+  font-size: 18px; /* Adjust the font size as needed */
+  background-color: #333; /* Change the button background color */
+  color: #fff; /* Change the button text color */
+  padding: 10px 20px; /* Add padding to the button for spacing */
+  
+  cursor: pointer; /* Add a pointer cursor on hover */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+/* Hover effect for the button */
+form button:hover {
+  background-color: #555; /* Change the button background color on hover */
+}

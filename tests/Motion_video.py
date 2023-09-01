@@ -1,6 +1,6 @@
 import time
 import datetime
-
+#import subprocess
 from gpiozero import MotionSensor
 from picamera2 import Picamera2
 from picamera2.encoders import H264Encoder
@@ -37,5 +37,5 @@ while True:
     print("Motion Stopped")
     
     # For testing, break the loop after 2 loops
-    if counter == 2:
-        break
+    #if counter == 2:
+        #break

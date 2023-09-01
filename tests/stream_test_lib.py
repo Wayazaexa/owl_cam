@@ -17,10 +17,10 @@ from picamera2.outputs import FileOutput
 PAGE = """\
 <html>
 <head>
-<title>picamera2 MJPEG streaming demo</title>
+<title>OnlyOwls</title>
 </head>
 <body>
-<h1>Picamera2 MJPEG Streaming Demo</h1>
+<h1>OnlyOwls</h1>
 <img src="stream.mjpg" width="640" height="480" />
 </body>
 </html>
@@ -82,3 +82,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
+    
+    def shutdown(self):
+        self.__shutdown_request = True
+        self.__is_shut_down_wait()

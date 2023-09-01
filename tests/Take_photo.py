@@ -7,6 +7,7 @@ from picamera2.outputs import FfmpegOutput
 def get_file_name():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
 
+
 file_name_photo = get_file_name()
 picam = Picamera2()
 

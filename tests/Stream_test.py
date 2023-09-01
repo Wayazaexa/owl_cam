@@ -8,7 +8,7 @@ from stream_test_lib import *
 
 picam2 = Picamera2()
 picam2.configure(picam2.create_video_configuration(main={"size": (640, 480)}))
-picam2.start_recording(JpegEncoder(), FileOutput(output))
+picam2.start_recording(JpegEncoder(), FileOutput(output_stream))
 
 try:
     address = ('', 8000)

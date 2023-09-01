@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owlcam</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <span class="logo">picam-boys owlcam</span>
+            <h1>Picamera2 MJPEG Streaming Demo</h1>
+            <img src="{{ url_for('stream') }}" width="640" height="480" />
+        
+        </div>
+      </div>
+    
+    <form action="/stream" method="post">
+        <button type="submit">Start Stream</button>
+    </form>
+
+</body>
+</html>
+
+
+

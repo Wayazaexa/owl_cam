@@ -25,6 +25,8 @@ picam2 = Picamera2()
 video_config = picam2.create_video_configuration(main={"size": (1280, 720)})
 picam2.configure(video_config)
 
+
+
 def get_file_name():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
 
@@ -50,6 +52,12 @@ encoder_stream = JpegEncoder(10000000)
 stream_thread = threading.Thread(target=owl_stream)
 stream_thread.start()
 
+file_name = get_file_name()
+
+#take a picture 
+picam2.capture_file('Photos/'+file_name+'.jpg')
+
+
 counter = 0
 
 # Infinite loop
@@ -59,7 +67,7 @@ while True:
 
 
     # Record a video for a set amount of time
-    file_name = get_file_name()
+    
     output_vid = FfmpegOutput('videos/'+file_name+'.mp4')
     #picam2.start_recording(encoder_vid, output_vid)
     picam2.start_encoder(encoder_vid, output_vid)
@@ -76,4 +84,5 @@ while True:
     #stream end
     
     #For testing, break the loop after 2 loops
+    
     
