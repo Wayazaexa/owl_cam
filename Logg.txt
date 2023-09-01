@@ -33,3 +33,37 @@ började med att försöka kombinera våra olika funktioner.
 Lyckats kombinera en live-feed samtidigt som vi spelar in.
 
 Börjat kolla på HTML-lösning för att kalla på funktioner via interaktion.
+
+21/08/2023
+
+En del av gruppen fokuserade på att hitta en lösningar för att interagera med en webbserver. En tog approachen att försökta lösa det med Pi-script och en annan försökte lösa det med Flask. Den andra delen av gruppen undersökte hur man multi-trådar ett program
+
+22/08/2023
+
+Hela gruppen engagerade sig till HTML lösningar med hjälp av de andras research dagen innan.
+
+23/08/2023
+
+Hela gruppen engagerade sig till HTML lösningar. utförte olika sorters tester, hemtade hem och provade en hel del koder men utan en komplett lösning. 
+
+25/08/2023
+
+Vi försökte att använda oss av ett helt annant bibliotek än tidigare, "opec-cv" men fick inte riktigt resultatet vi sökte. Det fanns en möjlighet att open-cv skulle fungera för oss men vi hade inte tiden att fördjupa oss i det biblioteket.
+
+28/08/2023
+
+Sista chansen för Pi-script och Flask lösningar som inte gav önskade resultat vilket ledde till ett "Emergency-möte" där vi bestämde oss för att ha en alternativ lösning med knappar på en breadboard istället för knappar på en hemsida.
+En del av gruppen fortsatte med HTML-lösningar och den andra delen började fixa med breadboarden.
+
+29/08/2023
+
+Knapparna applicerades till koden, vi hade viss problematik med att kunna kombinera funktioner och försökte lösa detta.
+
+30/08/2023
+
+Fortsatt arbete med att lägga till funktionaltiet med knapparna och arbete kring att få "back-end" funktioner att fungera med "front-end" dvs kombinera python-kod med CSS och HTML. Det fanns fortfarande inte någon lösning till att köra mer än en funktion i taget. 
+
+31/08/2023 
+
+Arbete med att få funktionerna att kunna köras samtidigt. dvs stream, inspelning och bildtagning från knapptryck med hjälp av threading biblioteket. Utvecklades även ett alternativ för att låta processorn hantera trådarna men gav lite segare respons. Vi valde att använda oss av threads-biblioteket
+
